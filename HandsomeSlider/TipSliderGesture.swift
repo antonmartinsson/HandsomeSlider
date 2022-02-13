@@ -8,14 +8,14 @@
 import SwiftUI
 
 extension View {
-	func tipSliderGesture(sliderOffset: Binding<CGFloat>, helper: SelectionableHelper) -> some View {
+	func tipSliderGesture(sliderOffset: Binding<Double>, helper: SelectionableHelper) -> some View {
 		self.modifier(SlideGesture(sliderOffset: sliderOffset, helper: helper))
 	}
 }
 
 struct SlideGesture: ViewModifier {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
-	@Binding var sliderOffset: CGFloat
+	@Binding var sliderOffset: Double
 	let helper: SelectionableHelper
 	
 	func getClosestValue(forLocation location: Double) -> Double {

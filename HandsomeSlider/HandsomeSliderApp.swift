@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct HandsomeSliderApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	var body: some Scene {
+		let selection1 = SliderObject(id: UUID().uuidString, title: "Hej", subtitle: "då")
+		let selection2 = SliderObject(id: UUID().uuidString, title: "Hejsan", subtitle: "svejsan")
+		let selection3 = SliderObject(id: UUID().uuidString, title: "Mejsan", subtitle: "plejsan")
+		let selection4 = SliderObject(id: UUID().uuidString, title: "Lejsan", subtitle: "blejsan")
+		let objects = [selection1, selection2, selection3, selection4]
+		
+		WindowGroup {
+			ContentView(objects: objects, selectedObject: selection1)
+		}
+	}
 }

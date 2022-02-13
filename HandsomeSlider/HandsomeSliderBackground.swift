@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HandsomeSliderBackground: View {
 	let helper: SelectionableHelper
-	@Binding var sliderOffset: CGFloat
+	@Binding var sliderOffset: Double
 
 	var body: some View {
 		let selectionables = helper.selectionables
@@ -35,8 +35,8 @@ struct HandsomeSliderBackground: View {
 struct Dot: View {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 
-	let newLocation: CGFloat
-	@Binding var sliderOffset: CGFloat
+	let newLocation: Double
+	@Binding var sliderOffset: Double
 	
 	var body: some View {
 		Button {

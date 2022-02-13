@@ -11,19 +11,11 @@ import StoreKit
 struct HandsomeSlider: View {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 
-	@State private var sliderOffset: CGFloat = 0
-	@State var currentSelection: SliderObject?
+	@State private var sliderOffset: Double = 0
 	@State var selectionables: [SliderObject]
+	@Binding var currentSelection: SliderObject?
 	let colorScheme: HandsomeColorScheme
-	
-	init(selectionables: [SliderObject],
-			 colorScheme: HandsomeColorScheme,
-			 initialSelection: SliderObject? = nil) {
-		self.colorScheme = colorScheme
-		_selectionables = State(initialValue: selectionables)
-		_currentSelection = State(initialValue: initialSelection ?? selectionables.first)
-	}
-	
+		
 	static let insidePadding: Double = 24
 	
 	var body: some View {
@@ -32,13 +24,11 @@ struct HandsomeSlider: View {
 			let selectionableHelper = SelectionableHelper(selectionables: selectionables, viewWidth: width)
 			let notificationCenter = NotificationCenter.default
 			let rotationNotification = UIDevice.orientationDidChangeNotification
+			
 			ZStack(alignment: .center) {
 				HandsomeSliderBackground(helper: selectionableHelper, sliderOffset: $sliderOffset)
 					.foregroundColor(colorScheme.backgroundColor)
-				HandsomeSliderProductLabel(selectionable: currentSelection, sliderOffset: $sliderOffset)
-				HandsomeSliderIndicator()
-					.offset(x: sliderOffset)
-					.tipSliderGesture(sliderOffset: $sliderOffset, helper: selectionableHelper)
+				HandsomeSliderIndicator(sliderOffset: $sliderOffset, selectionable: $currentSelection, helper: selectionableHelper)
 			}
 			.task {
 				guard let initialSelection = currentSelection else { return }

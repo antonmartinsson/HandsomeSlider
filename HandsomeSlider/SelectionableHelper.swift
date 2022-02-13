@@ -12,6 +12,7 @@ class SelectionableHelper {
 	let selectionables: [SliderObject]
 	let firstPosition: Double
 	let lastPosition: Double
+	
 	private var positionsDictionary: [SliderObject : Double] = [:]
 	private var selectionablesDictionary: [Double : SliderObject] = [:]
 	
