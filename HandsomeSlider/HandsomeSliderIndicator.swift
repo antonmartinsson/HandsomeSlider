@@ -9,10 +9,15 @@ import SwiftUI
 import StoreKit
 
 struct HandsomeSliderIndicator: View {
+	
+	static let sliderRadius: Double = 25
+	
 	var body: some View {
+		let size = HandsomeSliderIndicator.sliderRadius * 2
+		
 		ZStack {
 			Circle()
-				.frame(width: 50, height: 50)
+				.frame(width: size, height: size)
 				.foregroundColor(.accentColor)
 		}
 	}

@@ -8,27 +8,26 @@
 import SwiftUI
 
 struct HandsomeSliderBackground: View {
-	let selectionables: [SliderObject]
-	let viewWidth: CGFloat
+	let helper: SelectionableHelper
 	@Binding var sliderOffset: CGFloat
 
 	var body: some View {
+		let selectionables = helper.selectionables
+		
 		ZStack(alignment: .center) {
 			RoundedRectangle(cornerRadius: (50 - 5) / 2)
 				.frame(height: 50 - 5)
 				.foregroundColor(.accentColor.opacity(0.2))
 				.shadow(color: .orange.opacity(0.5), radius: 10, x: 0, y: 0)
 			HStack(spacing: 0) {
-				ForEach(1...selectionables.count, id:\.self) { index in
-					let count = selectionables.count
-					let newLocation = SliderObject.getLocation(for: index, inListWithCount: count, viewWidth: viewWidth)
-					if index == 1 {
+				ForEach(selectionables, id:\.self) { selectionable in
+					Dot(newLocation: helper.getPosition(for: selectionable), sliderOffset: $sliderOffset)
+					if selectionable != selectionables.last {
 						Spacer()
 					}
-					Dot(newLocation: newLocation, sliderOffset: $sliderOffset)
-					Spacer()
 				}
 			}
+			.padding(HandsomeSlider.insidePadding)
 		}
 	}
 }

@@ -8,28 +8,24 @@
 import SwiftUI
 
 extension View {
-	func tipSliderGesture(sliderOffset: Binding<CGFloat>, selectionables: [SliderObject], viewWidth: Double) -> some View {
-		self.modifier(SlideGesture(sliderOffset: sliderOffset, selectionables: selectionables, viewWidth: viewWidth))
+	func tipSliderGesture(sliderOffset: Binding<CGFloat>, helper: SelectionableHelper) -> some View {
+		self.modifier(SlideGesture(sliderOffset: sliderOffset, helper: helper))
 	}
 }
 
 struct SlideGesture: ViewModifier {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 	@Binding var sliderOffset: CGFloat
-	let selectionables: [SliderObject]
-	let viewWidth: Double
+	let helper: SelectionableHelper
 	
 	func getClosestValue(forLocation location: Double) -> Double {
 		var possibleValues: [Double] = .empty
-		for (index, _) in selectionables.enumerated() {
-			let oneBasedIndex = index + 1
-			let count = selectionables.count
-			let sliderLocation = SliderObject.getLocation(for: oneBasedIndex, inListWithCount: count, viewWidth: viewWidth)
-			possibleValues.append(sliderLocation)
+		for selectionable in helper.selectionables {
+			possibleValues.append(helper.getPosition(for: selectionable))
 		}
 		
-		guard let over = possibleValues.first(where: { $0 >= location }) else { return viewWidth - (viewWidth / 2) - 25 }
-		guard let under = possibleValues.last(where: { $0 <= location }) else { return 0 - (viewWidth / 2) + 25}
+		guard let over = possibleValues.first(where: { $0 >= location }) else { return helper.lastPosition }
+		guard let under = possibleValues.last(where: { $0 <= location }) else { return helper.firstPosition }
 		
 		let diffOver = over - location
 		let diffUnder = location - under
