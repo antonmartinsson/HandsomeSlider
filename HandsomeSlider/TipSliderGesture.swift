@@ -20,7 +20,7 @@ struct SlideGesture: ViewModifier {
 	
 	func getClosestValue(forLocation location: Double) -> Double {
 		var possibleValues: [Double] = .empty
-		for selectionable in helper.selectionables {
+		for selectionable in helper.sliderObjects {
 			possibleValues.append(helper.getPosition(for: selectionable))
 		}
 		

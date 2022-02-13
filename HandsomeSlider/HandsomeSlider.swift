@@ -12,7 +12,7 @@ struct HandsomeSlider: View {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 
 	@State private var sliderOffset: Double = 0
-	@State var selectionables: [SliderObject]
+	@State var sliderObjects: [SliderObject]
 	@Binding var currentSelection: SliderObject?
 	let colorScheme: HandsomeColorScheme
 		
@@ -23,7 +23,7 @@ struct HandsomeSlider: View {
 			let width = geometry.size.width
 			let notificationCenter = NotificationCenter.default
 			let rotationNotification = UIDevice.orientationDidChangeNotification
-			let selectionableHelper = SelectionableHelper(selectionables: selectionables,
+			let selectionableHelper = SelectionableHelper(sliderObjects: sliderObjects,
 																										viewWidth: width,
 																										colorScheme: colorScheme)
 			

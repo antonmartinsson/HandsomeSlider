@@ -14,7 +14,7 @@ struct ContentView: View {
 	var body: some View {
 		let colorScheme = HandsomeColorScheme.defaultScheme
 		
-		HandsomeSlider(selectionables: objects,
+		HandsomeSlider(sliderObjects: objects,
 									 currentSelection: $selectedObject,
 									 colorScheme: colorScheme)
 			.padding(24)

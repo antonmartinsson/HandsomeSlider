@@ -9,26 +9,26 @@ import Foundation
 
 class SelectionableHelper {
 	
-	let selectionables: [SliderObject]
+	let sliderObjects: [SliderObject]
 	let firstPosition: Double
 	let lastPosition: Double
 	let colorScheme: HandsomeColorScheme
 	
 	private var positionsDictionary: [SliderObject : Double] = [:]
-	private var selectionablesDictionary: [Double : SliderObject] = [:]
+	private var sliderObjectsDictionary: [Double : SliderObject] = [:]
 	
-	init(selectionables: [SliderObject],
+	init(sliderObjects: [SliderObject],
 			 viewWidth: Double,
 			 colorScheme: HandsomeColorScheme) {
-		self.selectionables = selectionables
+		self.sliderObjects = sliderObjects
 		self.colorScheme = colorScheme
 		self.firstPosition = -(viewWidth / 2) + 25
 		self.lastPosition = (viewWidth / 2) - 25
 		
-		for (index, selectionable) in selectionables.enumerated() {
-			let position = getLocation(for: index + 1, inListWithCount: selectionables.count, viewWidth: viewWidth)
+		for (index, selectionable) in sliderObjects.enumerated() {
+			let position = getLocation(for: index + 1, inListWithCount: sliderObjects.count, viewWidth: viewWidth)
 			positionsDictionary[selectionable] = position
-			selectionablesDictionary[position] = selectionable
+			sliderObjectsDictionary[position] = selectionable
 		}
 	}
 	
@@ -37,7 +37,7 @@ class SelectionableHelper {
 	}
 	
 	func getSelectionable(for position: Double) -> SliderObject? {
-		return selectionablesDictionary[position]
+		return sliderObjectsDictionary[position]
 	}
 	
 	/**

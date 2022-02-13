@@ -12,7 +12,7 @@ struct HandsomeSliderBackground: View {
 	@Binding var sliderOffset: Double
 
 	var body: some View {
-		let selectionables = helper.selectionables
+		let sliderObjects = helper.sliderObjects
 		let height = (HandsomeSliderIndicator.sliderRadius * 2) - 10
 		
 		ZStack(alignment: .center) {
@@ -21,10 +21,10 @@ struct HandsomeSliderBackground: View {
 				.frame(height: height)
 				.shadow(color: .orange.opacity(0.5), radius: 10, x: 0, y: 0)
 			HStack(spacing: 0) {
-				ForEach(selectionables, id:\.self) { selectionable in
+				ForEach(sliderObjects, id:\.self) { selectionable in
 					Dot(newLocation: helper.getPosition(for: selectionable), sliderOffset: $sliderOffset)
 						.foregroundColor(helper.colorScheme.stepColor)
-					if selectionable != selectionables.last {
+					if selectionable != sliderObjects.last {
 						Spacer()
 					}
 				}
