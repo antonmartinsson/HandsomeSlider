@@ -16,19 +16,23 @@ struct HandsomeSlider: View {
 	@Binding var currentSelection: SliderObject?
 	let colorScheme: HandsomeColorScheme
 		
-	static let insidePadding: Double = 24
+	static let insidePadding: Double = 16
 	
 	var body: some View {
 		GeometryReader { geometry in
 			let width = geometry.size.width
-			let selectionableHelper = SelectionableHelper(selectionables: selectionables, viewWidth: width)
 			let notificationCenter = NotificationCenter.default
 			let rotationNotification = UIDevice.orientationDidChangeNotification
+			let selectionableHelper = SelectionableHelper(selectionables: selectionables,
+																										viewWidth: width,
+																										colorScheme: colorScheme)
 			
 			ZStack(alignment: .center) {
-				HandsomeSliderBackground(helper: selectionableHelper, sliderOffset: $sliderOffset)
-					.foregroundColor(colorScheme.backgroundColor)
-				HandsomeSliderIndicator(sliderOffset: $sliderOffset, selectionable: $currentSelection, helper: selectionableHelper)
+				HandsomeSliderBackground(helper: selectionableHelper,
+																 sliderOffset: $sliderOffset)
+				HandsomeSliderIndicator(sliderOffset: $sliderOffset,
+																selectionable: $currentSelection,
+																helper: selectionableHelper)
 			}
 			.task {
 				guard let initialSelection = currentSelection else { return }

@@ -12,12 +12,16 @@ class SelectionableHelper {
 	let selectionables: [SliderObject]
 	let firstPosition: Double
 	let lastPosition: Double
+	let colorScheme: HandsomeColorScheme
 	
 	private var positionsDictionary: [SliderObject : Double] = [:]
 	private var selectionablesDictionary: [Double : SliderObject] = [:]
 	
-	init(selectionables: [SliderObject], viewWidth: Double) {
+	init(selectionables: [SliderObject],
+			 viewWidth: Double,
+			 colorScheme: HandsomeColorScheme) {
 		self.selectionables = selectionables
+		self.colorScheme = colorScheme
 		self.firstPosition = -(viewWidth / 2) + 25
 		self.lastPosition = (viewWidth / 2) - 25
 		

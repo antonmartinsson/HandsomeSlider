@@ -17,11 +17,13 @@ struct HandsomeSliderBackground: View {
 		
 		ZStack(alignment: .center) {
 			RoundedRectangle(cornerRadius: (height) / 2)
+				.foregroundColor(helper.colorScheme.backgroundColor)
 				.frame(height: height)
 				.shadow(color: .orange.opacity(0.5), radius: 10, x: 0, y: 0)
 			HStack(spacing: 0) {
 				ForEach(selectionables, id:\.self) { selectionable in
 					Dot(newLocation: helper.getPosition(for: selectionable), sliderOffset: $sliderOffset)
+						.foregroundColor(helper.colorScheme.stepColor)
 					if selectionable != selectionables.last {
 						Spacer()
 					}
@@ -46,7 +48,6 @@ struct Dot: View {
 		} label: {
 			Circle()
 				.frame(width: 12, height: 12)
-				.foregroundColor(.white)
 		}
 	}
 }
