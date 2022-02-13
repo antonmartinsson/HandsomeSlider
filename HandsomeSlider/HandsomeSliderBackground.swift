@@ -13,11 +13,11 @@ struct HandsomeSliderBackground: View {
 
 	var body: some View {
 		let selectionables = helper.selectionables
+		let height = (HandsomeSliderIndicator.sliderRadius * 2) - 10
 		
 		ZStack(alignment: .center) {
-			RoundedRectangle(cornerRadius: (50 - 5) / 2)
-				.frame(height: 50 - 5)
-				.foregroundColor(.accentColor.opacity(0.2))
+			RoundedRectangle(cornerRadius: (height) / 2)
+				.frame(height: height)
 				.shadow(color: .orange.opacity(0.5), radius: 10, x: 0, y: 0)
 			HStack(spacing: 0) {
 				ForEach(selectionables, id:\.self) { selectionable in

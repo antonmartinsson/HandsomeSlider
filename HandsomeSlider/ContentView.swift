@@ -14,11 +14,13 @@ struct ContentView: View {
 	let selection4 = SliderObject(id: UUID().uuidString, title: "Lejsan", subtitle: "blejsan")
 	
 	var body: some View {
-		HandsomeSlider(currentSelection: selection1,
-									 selectionables: [selection1,
-																		selection2,
-																		selection3,
-																		selection4])
+		let colorScheme = HandsomeColorScheme.defaultScheme
+		let selections = [selection1,
+											selection2,
+											selection3,
+											selection4]
+		
+		HandsomeSlider(selectionables: selections, colorScheme: colorScheme)
 			.padding()
 	}
 }
