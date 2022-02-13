@@ -46,6 +46,6 @@ struct HandsomeSliderIndicator: View {
 			}
 		}
 		.offset(x: sliderOffset)
-		.tipSliderGesture(sliderOffset: $sliderOffset, helper: helper)
+		.sliderGesture(sliderOffset: $sliderOffset, helper: helper)
 	}
 }

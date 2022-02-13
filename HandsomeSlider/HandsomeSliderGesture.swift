@@ -1,5 +1,5 @@
 //
-//  TipSliderGesture.swift
+//  HandsomeSliderGesture.swift
 //  Cryptoverview
 //
 //  Created by Anton Martinsson on 2022-01-15.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-	func tipSliderGesture(sliderOffset: Binding<Double>, helper: SelectionableHelper) -> some View {
+	func sliderGesture(sliderOffset: Binding<Double>, helper: SelectionableHelper) -> some View {
 		self.modifier(SlideGesture(sliderOffset: sliderOffset, helper: helper))
 	}
 }
