@@ -23,19 +23,21 @@ struct HandsomeSliderIndicator: View {
 		ZStack {
 			Circle()
 				.frame(width: size, height: size)
-				.foregroundColor(.accentColor)
+				.foregroundColor(helper.colorScheme.indicatorColor)
 			
-			if let title = selectionable?.title, let subtitle = selectionable?.subtitle {
+			if let title = selectionable?.title {
 				withAnimation(reduceMotion ? nil : .easeInOut) {
 					VStack(alignment: .center, spacing: 4) {
 						Text(title)
 							.fontWeight(.light)
 							.font(.callout)
 							.offset(y: 65)
-						Text(subtitle)
-							.fontWeight(.medium)
-							.font(.title3)
-							.offset(y: 65)
+						if let subtitle = selectionable?.subtitle {
+							Text(subtitle)
+								.fontWeight(.medium)
+								.font(.title3)
+								.offset(y: 65)
+						}
 					}
 				}
 			} else {

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct HandsomeColorScheme {
-	let backgroundColor: Color
-	let stepColor: Color
-	let indicatorColor: Color
+public struct HandsomeColorScheme {
+	public let backgroundColor: Color
+	public let stepColor: Color
+	public let indicatorColor: Color
 	
-	static var defaultScheme: Self = {
+	public static var defaultScheme: Self = {
 		let backgroundColor: Color = .blue.opacity(0.2)
 		let stepColor: Color = .white
 		let indicatorColor: Color = .blue
@@ -21,7 +21,7 @@ struct HandsomeColorScheme {
 															 indicator: indicatorColor)
 	}()
 	
-	init(background: Color, steps: Color = .white, indicator: Color = .blue) {
+	public init(background: Color, steps: Color = .white, indicator: Color = .blue) {
 		self.backgroundColor = background
 		self.stepColor = steps
 		self.indicatorColor = indicator

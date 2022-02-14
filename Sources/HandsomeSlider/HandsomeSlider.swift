@@ -8,17 +8,23 @@
 import SwiftUI
 import StoreKit
 
-struct HandsomeSlider: View {
+public struct HandsomeSlider: View {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 
 	@State private var sliderOffset: Double = 0
-	@State var sliderObjects: [SliderObject]
-	@Binding var currentSelection: SliderObject?
-	let colorScheme: HandsomeColorScheme
+	@State private var sliderObjects: [SliderObject]
+	@Binding private var currentSelection: SliderObject?
+	private let colorScheme: HandsomeColorScheme
 		
 	static let insidePadding: Double = 16
 	
-	var body: some View {
+	public init(sliderObjects: [SliderObject], initialSelection: Binding<SliderObject?>, colorScheme: HandsomeColorScheme = HandsomeColorScheme.defaultScheme) {
+		self.sliderObjects = sliderObjects
+		self.colorScheme = colorScheme
+		_currentSelection = initialSelection
+	}
+	
+	public var body: some View {
 		GeometryReader { geometry in
 			let width = geometry.size.width
 			let notificationCenter = NotificationCenter.default
@@ -34,10 +40,10 @@ struct HandsomeSlider: View {
 																selectionable: $currentSelection,
 																helper: selectionableHelper)
 			}
-			.task {
+			.onAppear(perform: {
 				guard let initialSelection = currentSelection else { return }
 				sliderOffset = selectionableHelper.getPosition(for: initialSelection)
-			}
+			})
 			.onReceive(notificationCenter.publisher(for: rotationNotification), perform: { _ in
 				guard let currentSelection = currentSelection else { return }
 				let newPosition = selectionableHelper.getPosition(for: currentSelection)
