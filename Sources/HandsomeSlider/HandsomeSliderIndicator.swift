@@ -15,10 +15,10 @@ struct HandsomeSliderIndicator: View {
 	@Binding var selectionable: SliderObject?
 	let helper: SelectionableHelper
 	
-	static let sliderRadius: Double = 25
+	static let radius: Double = 25
 	
 	var body: some View {
-		let size: Double = HandsomeSliderIndicator.sliderRadius * 2
+		let size: Double = HandsomeSliderIndicator.radius * 2
 		
 		ZStack {
 			Circle()

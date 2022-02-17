@@ -22,8 +22,8 @@ class SelectionableHelper {
 			 colorScheme: HandsomeColorScheme) {
 		self.sliderObjects = sliderObjects
 		self.colorScheme = colorScheme
-		self.firstPosition = -(viewWidth / 2) + 25
-		self.lastPosition = (viewWidth / 2) - 25
+		self.firstPosition = -(viewWidth / 2) + HandsomeSliderIndicator.radius
+		self.lastPosition = (viewWidth / 2) - HandsomeSliderIndicator.radius
 		
 		for (index, selectionable) in sliderObjects.enumerated() {
 			let position = getLocation(for: index + 1, inListWithCount: sliderObjects.count, viewWidth: viewWidth)
@@ -52,7 +52,10 @@ class SelectionableHelper {
 		} else if index == count {
 			return lastPosition
 		} else {
-			return firstPosition + (((viewWidth - (HandsomeSlider.insidePadding * 2)) / ((Double(count) - 1)) * Double(index - 1)))
+			let sliderObjectCount = (Double(count) - 1)
+			let amountOfSteps = Double(index - 1)
+			let firstPosition = -((viewWidth - (HandsomeSlider.insidePadding * 2)) / 2)
+			return firstPosition + (((viewWidth - (HandsomeSlider.insidePadding * 2)) / sliderObjectCount) * amountOfSteps)
 		}
 	}
 }

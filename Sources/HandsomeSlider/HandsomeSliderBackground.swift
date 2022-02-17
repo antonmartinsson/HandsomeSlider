@@ -13,7 +13,7 @@ struct HandsomeSliderBackground: View {
 
 	var body: some View {
 		let sliderObjects = helper.sliderObjects
-		let height = (HandsomeSliderIndicator.sliderRadius * 2) - 10
+		let height = (HandsomeSliderIndicator.radius * 2) - 10
 		
 		ZStack(alignment: .center) {
 			RoundedRectangle(cornerRadius: (height) / 2)
