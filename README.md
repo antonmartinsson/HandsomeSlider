@@ -57,14 +57,3 @@ HandsomeSlider(sliderOptions: tipOptions, initialSelection: selectedTip, colorSc
 ```
 
 Please note that more customization options are planned for future releases. In the meantime, I hope you enjoy using HandsomeSlider! 
-
-## Topics
-
-### Main view
-
-- ``HandsomeSlider``
-
-### Related data types
-
-- ``HandsomeColorScheme``
-- ``SliderOption``
