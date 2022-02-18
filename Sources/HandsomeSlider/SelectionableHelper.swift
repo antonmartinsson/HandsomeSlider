@@ -54,8 +54,9 @@ class SelectionableHelper {
 		} else {
 			let sliderObjectCount = (Double(count) - 1)
 			let amountOfSteps = Double(index - 1)
-			let firstPosition = -((viewWidth - (HandsomeSlider.insidePadding * 2)) / 2)
-			return firstPosition + (((viewWidth - (HandsomeSlider.insidePadding * 2)) / sliderObjectCount) * amountOfSteps)
+			let centerOfFirstDotToCenterOfLastDot = (viewWidth - (HandsomeSlider.insidePadding * 2) - (Dot.radius * 2))
+			let firstPosition = -(centerOfFirstDotToCenterOfLastDot / 2)
+			return firstPosition + (centerOfFirstDotToCenterOfLastDot / sliderObjectCount * amountOfSteps)
 		}
 	}
 }

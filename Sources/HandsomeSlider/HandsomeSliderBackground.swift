@@ -37,6 +37,7 @@ struct HandsomeSliderBackground: View {
 struct Dot: View {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 
+	static let radius: Double = 6
 	let newLocation: Double
 	@Binding var sliderOffset: Double
 	
@@ -47,7 +48,7 @@ struct Dot: View {
 			}
 		} label: {
 			Circle()
-				.frame(width: 12, height: 12)
+				.frame(width: Dot.radius * 2, height: Dot.radius * 2)
 		}
 	}
 }
