@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct HandsomeSliderBackground: View {
-	let helper: SelectionableHelper
+	let viewModel: SliderViewModel
 	@Binding var sliderOffset: Double
 
 	var body: some View {
-		let sliderObjects = helper.sliderObjects
+		let sliderOptions = viewModel.sliderOptions
 		let height = (HandsomeSliderIndicator.radius * 2) - 10
 		
 		ZStack(alignment: .center) {
 			RoundedRectangle(cornerRadius: (height) / 2)
-				.foregroundColor(helper.colorScheme.backgroundColor)
+				.foregroundColor(viewModel.colorScheme.backgroundColor)
 				.frame(height: height)
 				.shadow(color: .orange.opacity(0.5), radius: 10, x: 0, y: 0)
 			HStack(spacing: 0) {
-				ForEach(sliderObjects, id:\.self) { selectionable in
-					Dot(newLocation: helper.getPosition(for: selectionable), sliderOffset: $sliderOffset)
-						.foregroundColor(helper.colorScheme.stepColor)
-					if selectionable != sliderObjects.last {
+				ForEach(sliderOptions, id:\.self) { option in
+					Dot(newLocation: viewModel.getPosition(for: option), sliderOffset: $sliderOffset)
+						.foregroundColor(viewModel.colorScheme.dotColor)
+					if option != sliderOptions.last {
 						Spacer()
 					}
 				}

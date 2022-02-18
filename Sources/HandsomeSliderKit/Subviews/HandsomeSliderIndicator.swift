@@ -12,8 +12,8 @@ struct HandsomeSliderIndicator: View {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 	
 	@Binding var sliderOffset: Double
-	@Binding var selectionable: SliderObject?
-	let helper: SelectionableHelper
+	@Binding var sliderOption: SliderOption?
+	let viewModel: SliderViewModel
 	
 	static let radius: Double = 25
 	
@@ -23,31 +23,31 @@ struct HandsomeSliderIndicator: View {
 		ZStack {
 			Circle()
 				.frame(width: size, height: size)
-				.foregroundColor(helper.colorScheme.indicatorColor)
+				.foregroundColor(viewModel.colorScheme.indicatorColor)
 			
-			if let title = selectionable?.title {
+			if let title = sliderOption?.title {
 				withAnimation(reduceMotion ? nil : .easeInOut) {
 					VStack(alignment: .center, spacing: 4) {
 						Text(title)
 							.fontWeight(.light)
 							.font(.callout)
-							.offset(y: 65)
-						if let subtitle = selectionable?.subtitle {
+							.offset(y: sliderOption?.subtitle == nil ? 50 : 65)
+						if let subtitle = sliderOption?.subtitle {
 							Text(subtitle)
 								.fontWeight(.medium)
 								.font(.title3)
-								.offset(y: 65)
+								.offset(y: sliderOption?.subtitle == nil ? 50 : 65)
 						}
 					}
 				}
 			} else {
 				withAnimation(reduceMotion ? nil : .easeInOut) {
 					Text("🤔")
-						.offset(y: 65)
+						.offset(y: 50)
 				}
 			}
 		}
 		.offset(x: sliderOffset)
-		.sliderGesture(sliderOffset: $sliderOffset, helper: helper)
+		.sliderGesture(sliderOffset: $sliderOffset, viewModel: viewModel)
 	}
 }
