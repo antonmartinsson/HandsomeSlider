@@ -1,5 +1,5 @@
 //
-//  SelectionableHelper.swift
+//  SliderViewModel.swift
 //  HandsomeSlider
 //
 //  Created by Anton Martinsson on 2022-02-13.
@@ -7,37 +7,38 @@
 
 import Foundation
 
-class SelectionableHelper {
+/// Holds various data that the HandsomeSlider uses frequently to display and update its user interface.
+class SliderViewModel {
 	
-	let sliderObjects: [SliderObject]
+	let sliderOptions: [SliderOption]
 	let firstPosition: Double
 	let lastPosition: Double
 	let colorScheme: HandsomeColorScheme
 	
-	private var positionsDictionary: [SliderObject : Double] = [:]
-	private var sliderObjectsDictionary: [Double : SliderObject] = [:]
+	private var positionsDictionary: [SliderOption : Double] = [:]
+	private var sliderOptionsDictionary: [Double : SliderOption] = [:]
 	
-	init(sliderObjects: [SliderObject],
+	init(sliderOptions: [SliderOption],
 			 viewWidth: Double,
 			 colorScheme: HandsomeColorScheme) {
-		self.sliderObjects = sliderObjects
+		self.sliderOptions = sliderOptions
 		self.colorScheme = colorScheme
 		self.firstPosition = -(viewWidth / 2) + HandsomeSliderIndicator.radius
 		self.lastPosition = (viewWidth / 2) - HandsomeSliderIndicator.radius
 		
-		for (index, selectionable) in sliderObjects.enumerated() {
-			let position = getLocation(for: index + 1, inListWithCount: sliderObjects.count, viewWidth: viewWidth)
+		for (index, selectionable) in sliderOptions.enumerated() {
+			let position = getLocation(for: index + 1, inListWithCount: sliderOptions.count, viewWidth: viewWidth)
 			positionsDictionary[selectionable] = position
-			sliderObjectsDictionary[position] = selectionable
+			sliderOptionsDictionary[position] = selectionable
 		}
 	}
 	
-	func getPosition(for selectionable: SliderObject) -> Double {
+	func getPosition(for selectionable: SliderOption) -> Double {
 		return positionsDictionary[selectionable] ?? 0
 	}
 	
-	func getSelectionable(for position: Double) -> SliderObject? {
-		return sliderObjectsDictionary[position]
+	func getSelectionable(for position: Double) -> SliderOption? {
+		return sliderOptionsDictionary[position]
 	}
 	
 	/**
@@ -52,11 +53,11 @@ class SelectionableHelper {
 		} else if index == count {
 			return lastPosition
 		} else {
-			let sliderObjectCount = (Double(count) - 1)
+			let optionCount = (Double(count) - 1)
 			let amountOfSteps = Double(index - 1)
 			let centerOfFirstDotToCenterOfLastDot = (viewWidth - (HandsomeSlider.insidePadding * 2) - (Dot.radius * 2))
 			let firstPosition = -(centerOfFirstDotToCenterOfLastDot / 2)
-			return firstPosition + (centerOfFirstDotToCenterOfLastDot / sliderObjectCount * amountOfSteps)
+			return firstPosition + (centerOfFirstDotToCenterOfLastDot / optionCount * amountOfSteps)
 		}
 	}
 }

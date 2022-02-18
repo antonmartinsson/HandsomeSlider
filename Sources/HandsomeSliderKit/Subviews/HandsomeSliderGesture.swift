@@ -8,24 +8,24 @@
 import SwiftUI
 
 extension View {
-	func sliderGesture(sliderOffset: Binding<Double>, helper: SelectionableHelper) -> some View {
-		self.modifier(SlideGesture(sliderOffset: sliderOffset, helper: helper))
+	func sliderGesture(sliderOffset: Binding<Double>, viewModel: SliderViewModel) -> some View {
+		self.modifier(SlideGesture(sliderOffset: sliderOffset, viewModel: viewModel))
 	}
 }
 
 struct SlideGesture: ViewModifier {
 	@Environment(\.accessibilityReduceMotion) var reduceMotion
 	@Binding var sliderOffset: Double
-	let helper: SelectionableHelper
+	let viewModel: SliderViewModel
 	
 	func getClosestValue(forLocation location: Double) -> Double {
 		var possibleValues: [Double] = .empty
-		for selectionable in helper.sliderObjects {
-			possibleValues.append(helper.getPosition(for: selectionable))
+		for selectionable in viewModel.sliderOptions {
+			possibleValues.append(viewModel.getPosition(for: selectionable))
 		}
 		
-		guard let over = possibleValues.first(where: { $0 >= location }) else { return helper.lastPosition }
-		guard let under = possibleValues.last(where: { $0 <= location }) else { return helper.firstPosition }
+		guard let over = possibleValues.first(where: { $0 >= location }) else { return viewModel.lastPosition }
+		guard let under = possibleValues.last(where: { $0 <= location }) else { return viewModel.firstPosition }
 		
 		let diffOver = over - location
 		let diffUnder = location - under

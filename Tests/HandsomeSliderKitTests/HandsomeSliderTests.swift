@@ -1,5 +1,5 @@
 import XCTest
-@testable import HandsomeSlider
+@testable import HandsomeSliderKit
 
 final class HandsomeSliderTests: XCTestCase {
     
