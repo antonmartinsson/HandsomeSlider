@@ -43,7 +43,7 @@ let tipOptions = [fivePercent, tenPercent, fifteenPercent, twentyPercent]
 
 The resulting view will look something like this:
 
-![SliderExample](SliderExample.png)
+![SliderExample](https://github.com/antonmartinsson/HandsomeSlider/blob/docs/Sources/HandsomeSliderKit/HandsomeSliderKit.docc/Resources/SliderExample.png)
 
 Should you want to customize the color scheme of the slider, you can do so by passing an instance of `HandsomeColorScheme` into the `HandsomeSlider`'s init.
 
