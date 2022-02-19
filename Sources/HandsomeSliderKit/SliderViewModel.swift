@@ -20,14 +20,14 @@ class SliderViewModel {
 	
 	init(sliderOptions: [SliderOption],
 			 viewWidth: Double,
-			 colorScheme: HandsomeColorScheme) {
+			 colorScheme: HandsomeColorScheme = .defaultScheme) {
 		self.sliderOptions = sliderOptions
 		self.colorScheme = colorScheme
 		self.firstPosition = -(viewWidth / 2) + HandsomeSliderIndicator.radius
 		self.lastPosition = (viewWidth / 2) - HandsomeSliderIndicator.radius
 		
 		for (index, selectionable) in sliderOptions.enumerated() {
-			let position = getLocation(for: index + 1, inListWithCount: sliderOptions.count, viewWidth: viewWidth)
+			let position = getLocation(forDotNumber: index + 1, inListWithCount: sliderOptions.count, viewWidth: viewWidth)
 			positionsDictionary[selectionable] = position
 			sliderOptionsDictionary[position] = selectionable
 		}
@@ -42,12 +42,37 @@ class SliderViewModel {
 	}
 	
 	/**
+	 Returns the value in the slider which is closest to the location supplied to the method.
+	 
+	 - Parameter location: The x location in the slider you want to find the closest value to.
+	 - Returns: The value in the slider closest to the supplied location.
+	 */
+	func getClosestValue(forLocation location: Double) -> Double {
+		var possibleValues: [Double] = .empty
+		for selectionable in sliderOptions {
+			possibleValues.append(getPosition(for: selectionable))
+		}
+		
+		guard let over = possibleValues.first(where: { $0 >= location }) else { return lastPosition }
+		guard let under = possibleValues.last(where: { $0 <= location }) else { return firstPosition }
+		
+		let diffOver = over - location
+		let diffUnder = location - under
+		
+		return (diffOver < diffUnder) ? over : under
+	}
+	
+	/**
 	 Calculates where in the `HandsomeSlider` a certain index is located.
 	 As the slider is centrally aligned in a ZStack, position 0 represents the very middle of the slider.
 	 
-	 
+	 - Parameters:
+			- index:
+			- count:
+			- viewWidth:
+	 - Returns:
 	 */
-	func getLocation(for index: Int, inListWithCount count: Int, viewWidth: Double) -> Double {
+	func getLocation(forDotNumber index: Int, inListWithCount count: Int, viewWidth: Double) -> Double {
 		if index == 1 {
 			return firstPosition
 		} else if index == count {
