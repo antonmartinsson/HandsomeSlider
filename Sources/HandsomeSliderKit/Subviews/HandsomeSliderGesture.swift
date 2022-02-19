@@ -18,21 +18,6 @@ struct SlideGesture: ViewModifier {
 	@Binding var sliderOffset: Double
 	let viewModel: SliderViewModel
 	
-	func getClosestValue(forLocation location: Double) -> Double {
-		var possibleValues: [Double] = .empty
-		for selectionable in viewModel.sliderOptions {
-			possibleValues.append(viewModel.getPosition(for: selectionable))
-		}
-		
-		guard let over = possibleValues.first(where: { $0 >= location }) else { return viewModel.lastPosition }
-		guard let under = possibleValues.last(where: { $0 <= location }) else { return viewModel.firstPosition }
-		
-		let diffOver = over - location
-		let diffUnder = location - under
-		
-		return (diffOver < diffUnder) ? over : under
-	}
-	
 	func body(content: Content) -> some View {
 		content
 			.highPriorityGesture(
@@ -42,7 +27,7 @@ struct SlideGesture: ViewModifier {
 					})
 					.onEnded({ value in
 						withAnimation(reduceMotion ? nil : .easeInOut) {
-							let closestValue = getClosestValue(forLocation: value.location.x - 25)
+							let closestValue = viewModel.getClosestValue(forLocation: value.location.x - 25)
 							sliderOffset = closestValue
 						}
 					})
