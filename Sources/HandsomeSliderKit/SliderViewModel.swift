@@ -49,12 +49,12 @@ class SliderViewModel {
 	 */
 	func getClosestValue(forLocation location: Double) -> Double {
 		var possibleValues: [Double] = .empty
-		for selectionable in viewModel.sliderOptions {
-			possibleValues.append(viewModel.getPosition(for: selectionable))
+		for selectionable in sliderOptions {
+			possibleValues.append(getPosition(for: selectionable))
 		}
 		
-		guard let over = possibleValues.first(where: { $0 >= location }) else { return viewModel.lastPosition }
-		guard let under = possibleValues.last(where: { $0 <= location }) else { return viewModel.firstPosition }
+		guard let over = possibleValues.first(where: { $0 >= location }) else { return lastPosition }
+		guard let under = possibleValues.last(where: { $0 <= location }) else { return firstPosition }
 		
 		let diffOver = over - location
 		let diffUnder = location - under
