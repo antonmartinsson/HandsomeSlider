@@ -1,6 +1,6 @@
 # ``HandsomeSliderKit``
 
-A Swift Package enabling seamless creation of segmented horizontal sliders. 
+A work in progress Swift Package enabling seamless creation of segmented horizontal sliders. 
 
 ## Getting Started
 
