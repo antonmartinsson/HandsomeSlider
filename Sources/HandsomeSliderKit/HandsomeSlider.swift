@@ -38,7 +38,7 @@ public struct HandsomeSlider: View {
         UIDevice.orientationDidChangeNotification
     }
     
-    var rotationNotification: NotificationCenter {
+    var notificationCenter: NotificationCenter {
         .default
     }
     #endif
